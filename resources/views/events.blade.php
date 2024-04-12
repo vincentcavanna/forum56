@@ -1,6 +1,6 @@
 @php use App\Models\Event; @endphp
 <x-layout>
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col xl:flex-row">
         <div class="flex-1">
             <h1 class="animate-fade-up bg-gradient-to-br from-blue-950 to-blue-700 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]">
                 Events
@@ -12,8 +12,8 @@
             </p>
         </div>
         <div class="flex flex-col flex-1">
-            @foreach(App\Models\Event::all() as $event)
-                <x-eventcard :event={{ $event }}/>
+            @foreach(App\Models\Event::with('talks')->get() as $event)
+                <x-eventcard :event="$event"/>
 
             @endforeach
         </div>
