@@ -1,0 +1,19 @@
+created:
+    - database/factories/EventFactory.php
+    - database/factories/VenueFactory.php
+    - database/factories/TalkFactory.php
+    - database/factories/AddressFactory.php
+    - database/migrations/2024_03_26_232624_create_events_table.php
+    - database/migrations/2024_03_26_232625_create_venues_table.php
+    - database/migrations/2024_03_26_232626_create_talks_table.php
+    - database/migrations/2024_03_26_232627_create_addresses_table.php
+    - app/Models/Event.php
+    - app/Models/Venue.php
+    - app/Models/Talk.php
+    - app/Models/Address.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Event: { title: string, description: 'string nullable', start_date: datetime, end_date: datetime, status: 'enum:published,draft', relationships: { hasMany: Talk } }
+    Venue: { name: string, relationships: { hasOne: 'Talk, Address' } }
+    Talk: { title: string, description: text, start_time: datetime, end_time: datetime, event_id: unsignedInteger, relationships: { belongsTo: 'Venue, Event' } }
+    Address: { line_1: string, line_2: string, city: string, country: string, postal_code: string, google_maps_url: string, venue_id: unsignedInteger, relationships: { belongsTo: Venue } }
