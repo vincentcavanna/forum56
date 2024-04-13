@@ -2,9 +2,9 @@
 <x-layout>
     <div class="flex flex-col xl:flex-row">
         <div class="flex-1">
-            <h1 class="animate-fade-up bg-gradient-to-br from-blue-950 to-blue-700 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]">
+            <x-h1>
                 Events
-            </h1>
+            </x-h1>
             <p class="mt-6 animate-fade-up text-center text-gray-500 [text-wrap:balance] md:text-xl"
                style="animation-delay: 0.25s; animation-fill-mode: forwards;">
                 Forum 56 is continually creating events for

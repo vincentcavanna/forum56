@@ -1,8 +1,7 @@
 <x-layout>
     <div class="z-10 w-full px-5 xl:px-0 space-y-24">
         <div>
-            <h1 class="animate-fade-up bg-gradient-to-br from-blue-950 to-blue-700 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]"
-                style="animation-delay:0.15s;animation-fill-mode:forwards">Applying the Liberal Arts</h1>
+            <x-h1>Applying the Liberal Arts</x-h1>
             <p class="mt-6 animate-fade-up text-center text-gray-500 [text-wrap:balance] md:text-xl"
                style="animation-delay:0.25s;animation-fill-mode:forwards">Connecting Tomorrow's Leaders with Today's</p>
             <div class="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5"
