@@ -18,3 +18,7 @@ Route::get('/our-team', function () {
 Route::get('/events', function () {
     return view('events');
 });
+
+Route::get('/join', function () {
+    return view('join');
+});
