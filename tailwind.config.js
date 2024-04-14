@@ -19,6 +19,9 @@ export default {
                 'gray-dark': '#273444',
                 'gray': '#8492a6',
                 'gray-light': '#d3dce6',
+                'error': '#bb1515',
+                'error-light': '#f4b7b7',
+                'contrast-dark': '#004c5b'
             },
         },
     },
