@@ -8,22 +8,16 @@ use App\Models\Profile;
 
 class Join extends Component
 {
-    #[Validate('required')]
     public $first_name = '';
 
-    #[Validate('required')]
     public $last_name = '';
 
-    #[Validate('required')]
     public $gender = '';
 
-    #[Validate('required', 'email', 'unique')]
     public $email = '';
 
-    #[Validate('required')]
     public $graduation_year = '';
 
-    #[Validate('required')]
     public $studies = '';
 
     public $linkedin = '';
@@ -47,7 +41,14 @@ class Join extends Component
 
     public function save()
     {
-        $this->validate();
+        $this->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'email' => 'required|unique:profiles',
+            'graduation_year' => 'required',
+            'studies' => 'required',
+        ]);
 
         $profile = Profile::create([
             'first_name' => $this->first_name,
