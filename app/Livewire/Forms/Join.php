@@ -38,11 +38,11 @@ class Join extends Component
     ];
 
     public $prefixOpts = [
+        ['value' => '', 'label' => 'No Prefix'],
         ['value' => 'Mr.', 'label' => 'Mr.'],
         ['value' => 'Ms.', 'label' => 'Ms.'],
         ['value' => 'Dr.', 'label' => 'Dr.'],
         ['value' => 'Prof.', 'label' => 'Prof.'],
-        ['value' => '', 'label' => 'Prefix'],
     ];
 
     public function save()
