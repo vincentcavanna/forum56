@@ -63,30 +63,37 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="/"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
                     <x-heroicon-c-home class="h-5 w-5"></x-heroicon-c-home>
                     <span class="ms-3">Home</span>
                 </a>
             </li>
             <li>
                 <a href="/about"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
                     <x-heroicon-c-question-mark-circle class="h-5 w-5"/>
                     <span class="flex-1 ms-3 whitespace-nowrap">About</span>
                 </a>
             </li>
             <li>
                 <a href="/our-team"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
                     <x-heroicon-c-user-group class="h-5 w-5"/>
                     <span class="flex-1 ms-3 whitespace-nowrap">Our Team</span>
                 </a>
             </li>
             <li>
                 <a href="/events"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
                     <x-heroicon-c-calendar-days class="h-5 w-5"/>
                     <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="/join"
+                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
+                    <x-heroicon-c-rocket-launch class="h-5 w-5"></x-heroicon-c-rocket-launch>
+                    <span class="ms-3">Join</span>
                 </a>
             </li>
         </ul>
