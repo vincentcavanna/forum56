@@ -56,50 +56,20 @@
     </x-dropdown>
 </div>
 
-<aside id="default-sidebar"
-       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-       aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-background">
-        <ul class="space-y-2 font-medium">
-            <li>
-                <a href="/"
-                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
-                    <x-heroicon-c-home class="h-5 w-5"></x-heroicon-c-home>
-                    <span class="ms-3">Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="/about"
-                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
-                    <x-heroicon-c-question-mark-circle class="h-5 w-5"/>
-                    <span class="flex-1 ms-3 whitespace-nowrap">About</span>
-                </a>
-            </li>
-            <li>
-                <a href="/our-team"
-                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
-                    <x-heroicon-c-user-group class="h-5 w-5"/>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Our Team</span>
-                </a>
-            </li>
-            <li>
-                <a href="/events"
-                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
-                    <x-heroicon-c-calendar-days class="h-5 w-5"/>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
-                </a>
-            </li>
-            <li>
-                <a href="/join"
-                   class="flex items-center p-2 gap-x-2 text-white rounded-lg hover:bg-accentDark group">
-                    <x-heroicon-c-rocket-launch class="h-5 w-5"></x-heroicon-c-rocket-launch>
-                    <span class="ms-3">Join</span>
-                </a>
-            </li>
-        </ul>
+<div class="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-blue-50 -z-10"></div>
+
+<div class="fixed top-0 w-full flex justify-center border-b border-gray bg-white/50 backdrop-blur-xl z-30 transition-all">
+    <div class="mx-20 flex h-16 items-center justify-start w-full space-x-20">
+        <a class="flex items-center font-display text-2xl" href="/">
+            <img alt="Forum 56 Logo" loading="lazy" width="250" height="68" decoding="async" data-nimg="1"
+                 class="mr-2 rounded-sm" style="color:transparent">
+        </a>
+        <a class="text-blue-950 font-display text-xl" href="/about">Our Story</a>
+        <a class="text-blue-950 font-display text-xl" href="/our-team">Our Team</a>
+        <a class="text-blue-950 font-display text-xl" href="/events">Events</a>
     </div>
-</aside>
-<div class="p-4 py-10 sm:ml-64">
+</div>
+<div class="p-4 py-10 sm:mx-20 mt-16">
     {{ $slot }}
 </div>
 @bukScripts
