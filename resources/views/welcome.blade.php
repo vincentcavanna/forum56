@@ -5,10 +5,12 @@
             <p class="mt-6 animate-fade-up text-center text-gray-500 [text-wrap:balance] md:text-xl"
                style="animation-delay:0.25s;animation-fill-mode:forwards">Connecting Tomorrow's Leaders with Today's</p>
             <div class="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5"
-                 style="animation-delay:0.3s;animation-fill-mode:forwards"><a
-                        class="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
-                        href="/join"
-                        target="_blank" rel="noopener noreferrer"><p>Join Our Network</p></a><a
+                 style="animation-delay:0.3s;animation-fill-mode:forwards">
+                <button class="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
+                        x-on:click="join = true">
+                    <p>Join Our Network</p>
+                </button>
+                <a
                         class="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
                         href="https://www.linkedin.com/company/forum-56/" target="_blank" rel="noopener noreferrer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
