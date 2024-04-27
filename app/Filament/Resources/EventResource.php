@@ -5,10 +5,20 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
+use App\Models\Talk;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -18,24 +28,6 @@ class EventResource extends Resource
     protected static ?string $model = Event::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
-                    ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-            ]);
-    }
 
     public static function table(Table $table): Table
     {
@@ -72,6 +64,54 @@ class EventResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Wizard::make([
+                    Step::make('Event Details')
+                        ->schema([
+                            TextInput::make('title')
+                                ->required()
+                                ->maxLength(255),
+                            TextInput::make('description')
+                                ->maxLength(255),
+                            DateTimePicker::make('start_date')
+                                ->required(),
+                            DateTimePicker::make('end_date')
+                                ->required(),
+                            TextInput::make('status')
+                                ->required()
+                                ->default('draft'),
+                        ]),
+                    Step::make('Itinerary')
+                        ->schema([
+                            Repeater::make('talks')
+                                ->relationship('talks')
+                                ->schema([
+                                    TextInput::make('title')
+                                        ->required()
+                                        ->maxLength(255),
+                                    TextInput::make('description')
+                                        ->maxLength(255),
+                                    Split::make([
+                                        DateTimePicker::make('start_time')
+                                            ->required(),
+                                        DateTimePicker::make('end_time')
+                                            ->required(),
+                                    ]),
+                                    Select::make('venue_id')
+                                        ->relationship('venue', 'name')
+                                        ->createOptionForm([
+                                            TextInput::make('name')
+                                        ])
+                                ])
+                        ]),
+
+                ])->columnSpan(1)
+            ])->columns(1);
     }
 
     public static function getRelations(): array
