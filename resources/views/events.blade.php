@@ -1,5 +1,11 @@
 @php use App\Models\Event; @endphp
 <x-layout>
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+
     <div class="flex flex-col xl:flex-row">
         <div class="flex-1">
             <x-h1>
@@ -11,11 +17,26 @@
                 students and professionals. Learn more about our upcoming events and get connected!
             </p>
         </div>
-        <div class="flex flex-col flex-1">
-            @foreach(App\Models\Event::with('talks')->get() as $event)
-                <x-eventcard :event="$event"/>
+        <div x-data="{ current: true }" class="flex flex-col flex-1">
+            <div class="flex flex-row justify-end">
+                <button class="px-8 py-3 bg-accentDark text-white rounded-full w-60 text-center"
+                        x-on:click="current = ! current"
+                        x-text="current ? 'Show Past Events' : 'Show Upcoming Events'">Toggle
+                    Events
+                </button>
+            </div>
+            <div x-cloak x-show="current">
+                @foreach(App\Models\Event::with('talks')->where('start_date', '>=', now())->orderByDesc('start_date')->get() as $event)
+                    <x-eventcard :event="$event"/>
 
-            @endforeach
+                @endforeach
+            </div>
+            <div x-cloak x-show="!current">
+                @foreach(App\Models\Event::with('talks')->where('start_date', '<', now())->orderByDesc('start_date')->get() as $event)
+                    <x-eventcard :event="$event"/>
+
+                @endforeach
+            </div>
         </div>
     </div>
 </x-layout>
