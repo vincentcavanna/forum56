@@ -16,27 +16,15 @@ class Join extends Component
 
     public $email = '';
 
-    public $graduation_year = '';
-
-    public $studies = '';
-
     public $linkedin = '';
 
     public $interests = '';
 
-    public $prefix = '';
+    public $phone = '';
 
     public $genderOpts = [
         ['value' => 'male', 'label' => 'Male'],
         ['value' => 'female', 'label' => 'Female'],
-    ];
-
-    public $prefixOpts = [
-        ['value' => '', 'label' => 'No Prefix'],
-        ['value' => 'Mr.', 'label' => 'Mr.'],
-        ['value' => 'Ms.', 'label' => 'Ms.'],
-        ['value' => 'Dr.', 'label' => 'Dr.'],
-        ['value' => 'Prof.', 'label' => 'Prof.'],
     ];
 
     public function save()
@@ -46,8 +34,7 @@ class Join extends Component
             'last_name' => 'required',
             'gender' => 'required',
             'email' => 'required|unique:profiles',
-            'graduation_year' => 'required',
-            'studies' => 'required',
+            'phone' => 'required',
         ]);
 
         $profile = Profile::create([
@@ -56,15 +43,11 @@ class Join extends Component
             'gender' => $this->gender,
             'email' => $this->email,
             'linkedin' => $this->linkedin,
-            'studies' => $this->studies,
             'interests' => $this->interests,
-            'graduation_year' => $this->graduation_year,
-            'prefix' => $this->prefix
+            'phone' => $this->phone,
         ]);
 
         $profile->save();
-
-        $this->redirect('/join');
     }
 
     public function render()
