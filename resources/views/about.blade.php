@@ -1,39 +1,40 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 @props([
     'members' => [
         [
             'name' => 'Joe Dunikoski',
             'position' => 'Co-founder & Executive Director',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'jDunikowski.jpeg',
             'linkedin' => 'https://www.linkedin.com/in/joseph-dunikoski/',
         ],
         [
             'name' => 'JP Rezendes',
             'position' => 'Co-founder & Director of Operations',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'jpRezendes.jpeg',
             'linkedin' => 'https://www.linkedin.com/in/jprezendes/',
         ],
         [
             'name' => 'Joseph Moynihan',
             'position' => 'Co-founder & Director of Technology',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'jMoynihan.jpeg',
             'linkedin' => 'https://www.linkedin.com/in/joseph-moynihan-0586051b9/',
         ],
         [
             'name' => 'Molly Zepeda',
             'position' => 'Co-founder',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'mZepeda.jpg',
             'linkedin' => 'https://www.linkedin.com/in/mollyzepeda1/',
         ],
         [
             'name' => 'Luke Posegate',
             'position' => 'Co-founder & Director of Communications',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'lPosegate.jpeg',
             'linkedin' => 'https://www.linkedin.com/in/luke-posegate/',
         ],
         [
             'name' => 'Vincent Cavanna',
             'position' => 'Website & Design',
-            'image' => 'joe-dunikoski.png',
+            'image' => 'vincentC.jpg',
             'linkedin' => 'https://www.linkedin.com/in/vincent-cavanna/',
         ],
     ]
@@ -53,7 +54,8 @@
     </div>
     <div class="my-10 grid w-full animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-2 lg:grid-cols-3 xl:px-0">
         @foreach($members as $member)
-            <x-team-card :name="$member['name']" :position="$member['position']" :image="$member['image']"
+            <x-team-card :name="$member['name']" :position="$member['position']"
+                         :image="asset('img/' . $member['image'])"
                          :linkedin="$member['linkedin']"/>
         @endforeach
     </div>

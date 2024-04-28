@@ -12,6 +12,7 @@ export default {
             colors: {
                 'primary': '#1e40af',
                 'background': '#1c2a51',
+                'backgroundDark': '#0d1427',
                 'accentLight': '#6497b1',
                 'accentMid': '#005b96',
                 'accentDark': '#03396c',
