@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
+use App\Models\EventStatus;
 use App\Models\Talk;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
@@ -82,7 +83,11 @@ class EventResource extends Resource
                                 ->required(),
                             DateTimePicker::make('end_date')
                                 ->required(),
-                            TextInput::make('status')
+                            Select::make('status')
+                                ->options([
+                                    EventStatus::Published->value => 'Published',
+                                    EventStatus::Draft->value => 'Draft',
+                                ])
                                 ->required()
                                 ->default('draft'),
                         ]),

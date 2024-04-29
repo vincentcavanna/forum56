@@ -1,4 +1,4 @@
-@php use App\Models\Event; @endphp
+@php use App\Models\Event;use App\Models\EventStatus; @endphp
 <x-layout>
     <style>
         [x-cloak] {
@@ -26,13 +26,13 @@
                 </button>
             </div>
             <div x-cloak x-show="current">
-                @foreach(App\Models\Event::with('talks')->where('start_date', '>=', now())->orderByDesc('start_date')->get() as $event)
+                @foreach(App\Models\Event::with('talks')->where('start_date', '>=', now())->where('status', '=',EventStatus::Published)->orderByDesc('start_date')->get() as $event)
                     <x-eventcard :event="$event"/>
 
                 @endforeach
             </div>
             <div x-cloak x-show="!current">
-                @foreach(App\Models\Event::with('talks')->where('start_date', '<', now())->orderByDesc('start_date')->get() as $event)
+                @foreach(App\Models\Event::with('talks')->where('start_date', '<', now())->where('status', '=',EventStatus::Published)->orderByDesc('start_date')->get() as $event)
                     <x-eventcard :event="$event"/>
 
                 @endforeach
