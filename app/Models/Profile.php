@@ -18,5 +18,6 @@ class Profile extends Model
         'studies',
         'interests',
         'graduation_year',
+        'phone',
     ];
 }

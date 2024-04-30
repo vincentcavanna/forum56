@@ -22,6 +22,8 @@ class Join extends Component
 
     public $phone = '';
 
+    public $submitted = false;
+
     public $genderOpts = [
         ['value' => 'male', 'label' => 'Male'],
         ['value' => 'female', 'label' => 'Female'],
@@ -48,6 +50,8 @@ class Join extends Component
         ]);
 
         $profile->save();
+
+        $submitted = true;
     }
 
     public function render()
