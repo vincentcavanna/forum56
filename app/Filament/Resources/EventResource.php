@@ -114,7 +114,7 @@ class EventResource extends Resource
                                     TextInput::make('description')
                                         ->maxLength(255)
                                         ->prefixIcon('heroicon-o-bars-3-bottom-left'),
-                                    Split::make([
+                                    Forms\Components\Split::make([
                                         DateTimePicker::make('start_time')
                                             ->seconds(false)
                                             ->minutesStep(5)
