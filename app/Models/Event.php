@@ -55,7 +55,7 @@ class Event extends Model
         return $events;
     }
 
-    public function start_date(): Carbon
+    public function start_date(): ?Carbon
     {
         return Carbon::make($this->talks()->min('start_time'));
     }
@@ -70,7 +70,7 @@ class Event extends Model
         return new EventBuilder($query);
     }
 
-    public function end_date(): Carbon
+    public function end_date(): ?Carbon
     {
         return Carbon::make($this->talks()->max('end_time'));
     }
