@@ -7,19 +7,22 @@ use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use App\Models\EventStatus;
 use App\Models\Talk;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -34,29 +37,41 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('start_date')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('end_date')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Stack::make([
+                    Tables\Columns\TextColumn::make('title')
+                        ->weight(FontWeight::Bold)
+                        ->searchable(),
+
+                    Tables\Columns\TextColumn::make('duration')
+                        ->state(function (Event $record): string {
+                            $start = $record->start_date()->setTimezone("CST");
+                            $end = $record->end_date()->setTimezone("CST");
+                            $startFmt = $start->format('jS F Y, g:i A');
+                            if ($start->isSameDay($end)) {
+                                return $startFmt . ' - ' . $end->format('g:i A');
+                            } else {
+                                return $startFmt . ' - ' . $end->format('jS F, g:i A');
+                            }
+                        })
+                        ->label('Event Duration')
+                        ->icon('heroicon-o-clock'),
+                    Tables\Columns\TextColumn::make('description')
+                        ->color('gray')
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('status')
+                        ->badge()
+                        ->color(fn(string $state): string => match ($state) {
+                            EventStatus::Published->value => 'success',
+                            EventStatus::Draft->value => 'warning',
+                            default => 'secondary',
+                        }),
+                ])
             ])
+            ->contentGrid(['md' => 2])
             ->filters([
                 //
             ])
+            ->defaultGroup('status')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -79,10 +94,6 @@ class EventResource extends Resource
                                 ->maxLength(255),
                             TextInput::make('description')
                                 ->maxLength(255),
-                            DateTimePicker::make('start_date')
-                                ->required(),
-                            DateTimePicker::make('end_date')
-                                ->required(),
                             Select::make('status')
                                 ->options([
                                     EventStatus::Published->value => 'Published',
@@ -98,21 +109,34 @@ class EventResource extends Resource
                                 ->schema([
                                     TextInput::make('title')
                                         ->required()
-                                        ->maxLength(255),
+                                        ->maxLength(255)
+                                        ->prefixIcon('heroicon-o-document-text'),
                                     TextInput::make('description')
-                                        ->maxLength(255),
+                                        ->maxLength(255)
+                                        ->prefixIcon('heroicon-o-bars-3-bottom-left'),
                                     Split::make([
                                         DateTimePicker::make('start_time')
-                                            ->required(),
+                                            ->seconds(false)
+                                            ->minutesStep(5)
+                                            ->native(false)
+                                            ->required()
+                                            ->prefixIcon('heroicon-o-clock'),
                                         DateTimePicker::make('end_time')
-                                            ->required(),
+                                            ->seconds(false)
+                                            ->minutesStep(5)
+                                            ->native(false)
+                                            ->required()
+                                            ->prefixIcon('heroicon-o-clock'),
                                     ]),
                                     Select::make('venue_id')
                                         ->relationship('venue', 'name')
                                         ->createOptionForm([
                                             TextInput::make('name')
                                         ])
+                                        ->prefixIcon('heroicon-o-map-pin')
+                                        ->prefixIconColor('info'),
                                 ])
+                                ->itemLabel(fn(array $state): ?string => $state['title'] ?? null),
                         ]),
 
                 ])->columnSpan(1)

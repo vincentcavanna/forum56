@@ -5,11 +5,11 @@
     ])
 
 <legend class="mt-4animate-fade-up bg-white text-left font-display text-2xl font-bold tracking-[-0.02em] text-primary [text-wrap:balance] md:text-5xl md:leading-[5rem]">
-    {{ Carbon::parse($startDate)->monthName }}
-    {{ Carbon::parse($startDate)->day }}
-    @if( !Carbon::parse($startDate)->isSameDay(Carbon::parse($endDate)))
+    {{ $startDate->monthName }}
+    {{ $startDate->day }}
+    @if( !$startDate->isSameDay($endDate))
         -
-        {{ Carbon::parse($endDate) ->monthName }}
-        {{ Carbon::parse($endDate)->day }}
+        {{ $endDate ->monthName }}
+        {{ $endDate->day }}
     @endif
 </legend>

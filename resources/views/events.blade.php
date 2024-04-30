@@ -26,15 +26,13 @@
                 </button>
             </div>
             <div x-cloak x-show="current">
-                @foreach(App\Models\Event::with('talks')->where('start_date', '>=', now())->where('status', '=',EventStatus::Published)->orderByDesc('start_date')->get() as $event)
+                @foreach(App\Models\Event::getSortedCurrentEvents() as $event)
                     <x-eventcard :event="$event"/>
-
                 @endforeach
             </div>
             <div x-cloak x-show="!current">
-                @foreach(App\Models\Event::with('talks')->where('start_date', '<', now())->where('status', '=',EventStatus::Published)->orderByDesc('start_date')->get() as $event)
+                @foreach(App\Models\Event::getSortedCurrentEvents(futureEvents: false) as $event)
                     <x-eventcard :event="$event"/>
-
                 @endforeach
             </div>
         </div>
